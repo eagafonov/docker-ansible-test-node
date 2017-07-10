@@ -7,17 +7,17 @@ clean:
 	-docker stop test-ansible-node
 	-docker rm test-ansible-node
 
-run-sshd: clean
+run-fg:
 	docker start test-ansible-node || \
 	docker run --name test-ansible-node \
 		-p 127.0.0.100:2222:22 \
 		-ti \
-		eagafonov/test-ansible-node \
-		/bin/sh -c '/usr/sbin/sshd -D'
+		eagafonov/test-ansible-node
 
-run: clean
+run:
 	docker start test-ansible-node || \
 	docker run --name test-ansible-node \
+		--detach \
 		-p 127.0.0.100:2222:22 \
 		-ti \
 		eagafonov/test-ansible-node
